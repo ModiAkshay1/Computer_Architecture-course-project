@@ -33,7 +33,7 @@ class Instruction:
 
     def get_path_XY(self,router_list):
         path=[]
-        path.append(int(self.source)-1)
+        path.append(router_list[int(self.source)-1])
         row1=["1","2","3"]
         row2=["4","5","6"]
         row3=["7","8","9"]
