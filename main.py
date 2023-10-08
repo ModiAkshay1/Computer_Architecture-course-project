@@ -33,6 +33,7 @@ class Instruction:
 
     def get_path_XY(self,router_list):
         path=[]
+        path.append(int(self.source)-1)
         row1=["1","2","3"]
         row2=["4","5","6"]
         row3=["7","8","9"]
@@ -43,7 +44,6 @@ class Instruction:
         if self.source==self.destination:
             return
         if self.source=="1":
-            path.append(router_list[0])
             diff=(int(self.destination)-int(self.source))
             i=1
             while (i<diff+1):
@@ -51,7 +51,6 @@ class Instruction:
                 i+=1
 
         elif self.source=="2":
-            path.append(router_list[1])
             if self.destination in row1:
                 path.append(router_list[int(self.destination)-1])
             elif self.destination in row2:
@@ -87,7 +86,6 @@ class Instruction:
                     path.append(router_list[8])
 
         elif self.source=="3":
-            path.append(router_list[2])
             if self.destination in row1:
                 path.append(router_list[1])
                 if self.destination == "1":
@@ -114,7 +112,6 @@ class Instruction:
                         path.append(router_list[6])
 
         elif self.source=="4":
-            path.append(router_list[3])
             if self.destination in row2:
                 path.append(router_list[4])
                 if self.destination=="6":
@@ -131,7 +128,6 @@ class Instruction:
                     path.append(router_list[i])
 
         elif self.source=="5":
-            path.append(router_list[4])
             if self.destination in row2:
                 path.append(router_list[int(self.destination)-1])
             elif self.destination in row1:
@@ -158,7 +154,6 @@ class Instruction:
                     path.append(router_list[8])
 
         elif self.source=="6":
-            path.append(router_list[5])
             if self.destination in row2:
                 path.append(router_list[4])
                 if self.destination=="4":
@@ -175,7 +170,6 @@ class Instruction:
                     path.append(router_list[i])
 
         elif self.source=="7":
-            path.append(router_list[6])
             if self.destination in row3:
                 path.append(router_list[7])
                 if self.destination == "9":
@@ -202,7 +196,6 @@ class Instruction:
                         path.append(router_list[2])
 
         elif self.source=="8":
-            path.append(router_list[7])
             if self.destination in row3:
                 path.append(router_list[int(self.destination)-1])
             elif self.destination in row2:
@@ -238,7 +231,6 @@ class Instruction:
                     path.append(router_list[2])
 
         elif self.source=="9":
-            path.append(router_list[8])
             i=7
             j=0
             diff=abs(int(self.destination)-int(self.source))
