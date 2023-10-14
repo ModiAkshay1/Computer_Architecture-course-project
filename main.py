@@ -278,28 +278,36 @@ class Router:
     crossbar = []
     sw_allocator = []
     ip_buffer = []
-
+    current_element=-1  #0 for input_buffer, 1 for SW, 2 for crossbar
     ip_port = ["North", "South", "East", "West", "Local"]
     op_port = ["North", "South", "East", "West", "Local"]
 
     def __init__(self, name):
         self.name = name
-    def add_source(self, source):
-        self.source = source
-        self.counter += 1
-    def add_destination(self, destination):
-        self.destination = destination 
-        self.counter += 1
-    def add_header(self):
-        self.counter += 1
-    def add_flit(self):
-        self.counter += 1
-    def add_tail(self):
-        self.counter = 0
+    # def add_source(self, source):
+    #     self.source = source
+    #     self.counter += 1
+    # def add_destination(self, destination):
+    #     self.destination = destination 
+    #     self.counter += 1
+    # def add_header(self):
+    #     self.counter += 1
+    # def add_flit(self):
+    #     self.counter += 1
+    # def add_tail(self):
+    #     self.counter = 0
     def update(self,instruction, clock_cyle, statement, source, destination):
-        L = ["Clock cycle: ", str(clock_cyle) + " ", "Flit: ", str(statement) + " ", "Source: ", source.name + " ", "Destination: ", destination.name, "\n"]
+        self.current_element+=1
+        type_of_element=""
+        if(self.current_element==0):
+            type_of_element="Input buffer"
+        elif(self.current_element==1):
+            type_of_element="SA"
+        elif(self.current_element==2):
+            type_of_element="Crossbar"
+        L = ["Clock cycle: ", str(clock_cyle) + " ", "Flit: ", str(statement) + " ", "Source: ", source.name + " ", "Destination: ", destination.name+" ","Present router: ",self.name+" ","Type: "+type_of_element,"\n"]
         outfile.writelines(L)
-        print("Clock cycle:", clock_cyle, "Flit:", statement, "Source:", instruction.source, "Destination:", instruction.destination)
+        print("Clock cycle:", clock_cyle, "Flit:", statement, "Source:", instruction.source, "Destination:", instruction.destination,"Present router: ",self.name+" ","Type: "+type_of_element)
         return 
 
 
@@ -417,54 +425,62 @@ class NoC:
             
             for instruction in queue:
                 queue_temp = queue.copy()
-                if len(instruction.head_path) > 1 and instruction.head_path[1].busy == 0 and (instruction.head_path[0].busy == 0 or instruction.head_path[0].busy == instruction.index):
-                    if instruction.start_time == -1: instruction.start_time = clock_cycle
-                    instruction.head_path[1].busy = instruction.index
-                    instruction.head_path[0].busy = instruction.index
-                    everything.append([instruction.head_path[0],instruction.head_path[1]])
+                if len(instruction.head_path) > 1 :
+                    if instruction.start_time == -1:
+                        instruction.start_time = clock_cycle
                     instruction.head_path[0].update(instruction, clock_cycle, "Head", instruction.head_path[0], instruction.head_path[1])
-                    instruction.head_path.pop(0)
-                    if len(instruction.route) == 2: continue
+                    if instruction.head_path[0].current_element==2 :
+                        instruction.head_path.pop(0)
                     
-                if len(instruction.head_path) - len(instruction.f1_path) == 2 or len(instruction.head_path) == 1:
-                    check = False
-                    if(len(instruction.f1_path) > 1) :
-                        check = True
-                        everything.append([instruction.f1_path[0],instruction.f1_path[1]])
-                        instruction.f1_path[0].update(instruction, clock_cycle, "Flit 1", instruction.f1_path[0], instruction.f1_path[1])
-                        instruction.f1_path.pop(0)
-                    if check and len(instruction.route) == 2: continue
-                    
-                if len(instruction.f1_path) - len(instruction.f2_path) == 2 or len(instruction.f1_path) == 1:
-                    check = False
-                    if(len(instruction.f2_path) > 1) :
-                        check = True
-                        everything.append([instruction.f2_path[0],instruction.f2_path[1]])
-                        instruction.f2_path[0].update(instruction, clock_cycle, "Flit 2", instruction.f2_path[0], instruction.f2_path[1])
-                        instruction.f2_path.pop(0)
-                    if check and len(instruction.route) == 2: continue
-                
-                if len(instruction.f2_path) - len(instruction.f3_path) == 2 or len(instruction.f2_path) == 1:
-                    check = False
-                    if(len(instruction.f3_path) > 1) :
-                        check = True
-                        everything.append([instruction.f3_path[0],instruction.f3_path[1]])
-                        instruction.f3_path[0].update(instruction, clock_cycle, "Flit 3", instruction.f3_path[0], instruction.f3_path[1])
-                        instruction.f3_path.pop(0)
-                    if check and len(instruction.route) == 2: continue
 
-                if len(instruction.f3_path) - len(instruction.tail) == 2 or len(instruction.f3_path) == 1:
-                    check = False
-                    if(len(instruction.tail_path) > 1) :
-                        check = True
-                        everything.append([instruction.tail_path[0],instruction.tail_path[1]])
-                        instruction.tail_path[0].update(instruction, clock_cycle, "Tail", instruction.tail_path[0], instruction.tail_path[1])
-                        instruction.tail_path[0].busy = False
-                        instruction.tail_path.pop(0)
-                    if len(instruction.tail_path) == 1 and instruction.end_time == 0: 
-                        instruction.update_end(clock_cycle)
-                        instruction.tail_path[0].busy = False
-                        # queue.pop(0)
+                # if len(instruction.head_path) > 1 and instruction.head_path[1].busy == 0 and (instruction.head_path[0].busy == 0 or instruction.head_path[0].busy == instruction.index):
+                #     if instruction.start_time == -1: instruction.start_time = clock_cycle
+                #     instruction.head_path[1].busy = instruction.index
+                #     instruction.head_path[0].busy = instruction.index
+                #     everything.append([instruction.head_path[0],instruction.head_path[1]])
+                #     instruction.head_path[0].update(instruction, clock_cycle, "Head", instruction.head_path[0], instruction.head_path[1])
+                #     instruction.head_path.pop(0)
+                #     if len(instruction.route) == 2: continue
+                    
+                # if len(instruction.head_path) - len(instruction.f1_path) == 2 or len(instruction.head_path) == 1:
+                #     check = False
+                #     if(len(instruction.f1_path) > 1) :
+                #         check = True
+                #         everything.append([instruction.f1_path[0],instruction.f1_path[1]])
+                #         instruction.f1_path[0].update(instruction, clock_cycle, "Flit 1", instruction.f1_path[0], instruction.f1_path[1])
+                #         instruction.f1_path.pop(0)
+                #     if check and len(instruction.route) == 2: continue
+                    
+                # if len(instruction.f1_path) - len(instruction.f2_path) == 2 or len(instruction.f1_path) == 1:
+                #     check = False
+                #     if(len(instruction.f2_path) > 1) :
+                #         check = True
+                #         everything.append([instruction.f2_path[0],instruction.f2_path[1]])
+                #         instruction.f2_path[0].update(instruction, clock_cycle, "Flit 2", instruction.f2_path[0], instruction.f2_path[1])
+                #         instruction.f2_path.pop(0)
+                #     if check and len(instruction.route) == 2: continue
+                
+                # if len(instruction.f2_path) - len(instruction.f3_path) == 2 or len(instruction.f2_path) == 1:
+                #     check = False
+                #     if(len(instruction.f3_path) > 1) :
+                #         check = True
+                #         everything.append([instruction.f3_path[0],instruction.f3_path[1]])
+                #         instruction.f3_path[0].update(instruction, clock_cycle, "Flit 3", instruction.f3_path[0], instruction.f3_path[1])
+                #         instruction.f3_path.pop(0)
+                #     if check and len(instruction.route) == 2: continue
+
+                # if len(instruction.f3_path) - len(instruction.tail) == 2 or len(instruction.f3_path) == 1:
+                #     check = False
+                #     if(len(instruction.tail_path) > 1) :
+                #         check = True
+                #         everything.append([instruction.tail_path[0],instruction.tail_path[1]])
+                #         instruction.tail_path[0].update(instruction, clock_cycle, "Tail", instruction.tail_path[0], instruction.tail_path[1])
+                #         instruction.tail_path[0].busy = False
+                #         instruction.tail_path.pop(0)
+                #     if len(instruction.tail_path) == 1 and instruction.end_time == 0: 
+                #         instruction.update_end(clock_cycle)
+                #         instruction.tail_path[0].busy = False
+                #         # queue.pop(0)
                         
         return everything
                         
