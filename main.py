@@ -7,9 +7,12 @@ class Instruction:
     data_path=[]
     tail_path = []
     route = []
-    head = ""
-    data=""
-    tail = ""
+    #head = ""
+    #data=""
+    #tail = ""
+    head = False
+    body = False
+    tail = False
     index = 0
     clock_cycle = 0
     end_time = 0
@@ -20,28 +23,32 @@ class Instruction:
     head1 = ""
     data1=""
     tail1 = ""
-    body = ""
+    body1 = ""
 
     def __init__(self,instruction,routing,router_list,index):
         self.index=index
         self.clock_cycle = int(instruction[0])
         self.source = instruction[1]
         self.destination = instruction[2]
-        self.head = self.destination + self.source + "00"
-        self.data = instruction[3] + "01"
-        self.tail = "00000000000000000000000000000010" #check krlena ek baar
+        # self.head = self.destination + self.source + "00"
+        # self.data = instruction[3] + "01"
+        # self.tail = "00000000000000000000000000000010" #check krlena ek baar
         self.make_path(routing,router_list)
 
-        self.data1 = instruction[3]
+        self.data1 = instruction[3]  #To check if given flit is head,tail or body
         if (self.data1[-2:] == "01"):
-            self.body = self.data1
+            self.body1 = self.data1
+            self.body = True
         elif (self.data1[-2:] == "00"):
             self.head1 = self.data1
+            self.head = True
         elif (self.data1[-2:] == "10"):
             self.tail1 = self.data1
+            self.tail = True
     
     def make_path(self,direction,router_list):
-        self.route = self.get_path_XY(router_list)
+        if direction == 1:
+            self.route = self.get_path_XY(router_list)
 
 
     def get_path_XY(self,router_list):
@@ -54,6 +61,7 @@ class Instruction:
         col2=["2","5","8"]
         col3=["3","4","9"]
         #Write code for XY routing
+        #Separate codes for head, body and tail
         if self.source==self.destination:
             return
         if self.source=="1":
@@ -267,12 +275,12 @@ class Router:
     busy = False
     source = ""
     destination = ""
-
     crossbar = []
     sw_allocator = []
     ip_buffer = []
-    ip_port = []
-    op_port = []
+
+    ip_port = ["North", "South", "East", "West", "Local"]
+    op_port = ["North", "South", "East", "West", "Local"]
 
     def __init__(self, name):
         self.name = name
@@ -395,7 +403,8 @@ class NoC:
         total_tic = self.clk1
         queue = []
         queue_temp = []
-        routing = int(input("Enter 1 for XY routing and 2 for YX routing: "))
+        #routing = int(input("Enter 1 for XY routing and 2 for YX routing: "))
+        routing = 1
         self.add_instruction(list_of_instructions, routing)
 
         for clock_cycle in range(total_tic):
