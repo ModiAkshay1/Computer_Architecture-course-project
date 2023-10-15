@@ -323,7 +323,7 @@ class NoC:
     traffic8 = []
     traffic9 = []
     all_instructions=[]
-    clk1 = 0 #To find total number of clock cycles
+    clk1 = 50 #To find total number of clock cycles
 
     r1 = Router("Router 1")
     r2 = Router("Router 2")
@@ -406,7 +406,7 @@ class NoC:
         return list
     
     def play(self):
-        everything = []
+        #everything = []
         #total_tic = int(input("Enter the total number of clock cycles: "))
         total_tic = self.clk1
         queue = []
@@ -425,12 +425,12 @@ class NoC:
             
             for instruction in queue:
                 queue_temp = queue.copy()
-                if len(instruction.head_path) > 1 :
+                if len(instruction.route) > 1 :
                     if instruction.start_time == -1:
                         instruction.start_time = clock_cycle
-                    instruction.head_path[0].update(instruction, clock_cycle, "Head", instruction.head_path[0], instruction.head_path[1])
-                    if instruction.head_path[0].current_element==2 :
-                        instruction.head_path.pop(0)
+                    instruction.route[0].update(instruction, clock_cycle, "Head", instruction.route[0], instruction.route[1])
+                    if instruction.route[0].current_element==2 :
+                        instruction.route.pop(0)
                     
 
                 # if len(instruction.head_path) > 1 and instruction.head_path[1].busy == 0 and (instruction.head_path[0].busy == 0 or instruction.head_path[0].busy == instruction.index):
@@ -482,5 +482,5 @@ class NoC:
                 #         instruction.tail_path[0].busy = False
                 #         # queue.pop(0)
                         
-        return everything
+        #return everything
                         
