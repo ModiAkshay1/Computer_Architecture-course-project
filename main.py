@@ -1,6 +1,9 @@
 from input import list_of_instructions
+from delay import delay_max
 # import matplotlib.pyplot as plt
 outfile = open('log.txt' , 'w')
+report_file = open('report.txt','w')
+delay_now =0
 
 class Instruction:
     route = []
@@ -283,7 +286,7 @@ class Router:
 
     def __init__(self, name):
         self.name = name
-    def update(self,instruction, clock_cyle,partname, source, destination):
+    def update(self,instruction, clock_cyle,partname, source, destination,delay_now):
         self.current_element+=1
         type_of_element=""
         if(self.current_element==0):
@@ -294,9 +297,11 @@ class Router:
             type_of_element="Crossbar"
         else:
             type_of_element=str(self.current_element)
-        L = ["Clock cycle: ", str(clock_cyle) + " ", "Flit: ",partname+ " ", "Source: ", source.name + " ", "Destination: ", destination.name+" ","Present router: ",self.name+" ","Type: "+type_of_element," \n"]
+        L = ["Clock cycle: ", str(clock_cyle) + " ||", " Flit: ",partname + " ||", " Source: ", instruction.source + " ||"," Destination: ",instruction.destination + " ||", " Present Router: ",self.name +" ||"," Next Router: ", destination.name+" ||"," Type: " +type_of_element," \n"]
         outfile.writelines(L)
-        print("Clock cycle:", clock_cyle, "Flit: ",  partname+" ", "Source:", instruction.source, "Destination:", instruction.destination,"Present router: ",self.name+" ","Type: "+type_of_element)
+        R = ["Clock cycle: ", str(clock_cyle) + " ||", " Flit: ",partname +" ||"," Source: ", instruction.source + " ||"," Destination: ",instruction.destination + " ||"," Present router: ",self.name+" ||"," Type: "+type_of_element +" ||"," Delay: ",str(delay_now), "\n"]
+        report_file.writelines(R)
+        # print("Clock cycle:", clock_cyle, "Flit: ",  partname+" ", "Source:", instruction.source, "Destination:", instruction.destination,"Present router: ",self.name+" ","Type: "+type_of_element)
         return 
 
 
@@ -408,6 +413,8 @@ class NoC:
         self.add_instruction(list_of_instructions, routing)
 
         for clock_cycle in range(total_tic):
+            global delay_now            
+            delay_now += delay_max
             queue = queue_temp.copy()
             x = self.check(clock_cycle)
             if len(x) > 0:
@@ -422,7 +429,9 @@ class NoC:
                 #     print("")
                 queue_temp = queue.copy()
                 if len(instruction.route) > 1 :
-                    instruction.route[0].update(instruction, clock_cycle,instruction.name, instruction.route[0], instruction.route[1])
+                    if(instruction.start_time==-1):
+                        instruction.start_time=delay_now
+                    instruction.route[0].update(instruction, clock_cycle,instruction.name, instruction.route[0], instruction.route[1],delay_now-instruction.start_time+delay_max)
                     if instruction.route[0].current_element==2 :
                         instruction.route.pop(0)
                     
