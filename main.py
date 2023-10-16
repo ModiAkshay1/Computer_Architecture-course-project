@@ -3,13 +3,7 @@ from input import list_of_instructions
 outfile = open('log.txt' , 'w')
 
 class Instruction:
-    head_path = []
-    data_path=[]
-    tail_path = []
     route = []
-    #head = ""
-    #data=""
-    #tail = ""
     head = False
     body = False
     tail = False
@@ -35,6 +29,7 @@ class Instruction:
         # self.data = instruction[3] + "01"
         # self.tail = "00000000000000000000000000000010" #check krlena ek baar
         self.make_path(routing,router_list)
+        print(len(self.route))
 
         self.data1 = x[3]  #To check if given flit is head,tail or body
         if (self.data1[-2:] == "01"):
@@ -57,7 +52,7 @@ class Instruction:
 
     def get_path_XY(self,router_list):
         path=[]
-        path.append(router_list[int(self.source)-1])
+        path.append(Router(router_list[int(self.source)-1]))
         row1=["1","2","3"]
         row2=["4","5","6"]
         row3=["7","8","9"]
@@ -72,195 +67,195 @@ class Instruction:
             diff=(int(self.destination)-int(self.source))
             i=1
             while (i<diff+1):
-                path.append(router_list[i])
+                path.append(Router(router_list[i]))
                 i+=1
 
         elif self.source=="2":
             if self.destination in row1:
-                path.append(router_list[int(self.destination)-1])
+                path.append(Router(router_list[int(self.destination)-1]))
             elif self.destination in row2:
                 if self.destination == "4":
-                    path.append(router_list[2])
-                    path.append(router_list[3])
+                    path.append(Router(router_list[2]))
+                    path.append(Router(router_list[3]))
                 elif self.destination == "5":
-                    path.append(router_list[2])
-                    path.append(router_list[3])
-                    path.append(router_list[4])
+                    path.append(Router(router_list[2]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
                 else:
-                    path.append(router_list[0])
-                    path.append(router_list[5])
+                    path.append(Router(router_list[0]))
+                    path.append(Router(router_list[5]))
             else:
                 if self.destination == "7":
-                    path.append(router_list[2])
-                    path.append(router_list[3])
-                    path.append(router_list[4])
-                    path.append(router_list[5])
-                    path.append(router_list[6])
+                    path.append(Router(router_list[2]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[6]))
                 elif self.destination == "8":
-                    path.append(router_list[2])
-                    path.append(router_list[3])
-                    path.append(router_list[4])
-                    path.append(router_list[5])
-                    path.append(router_list[6])
-                    path.append(router_list[7])
+                    path.append(Router(router_list[2]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[6]))
+                    path.append(Router(router_list[7]))
                 else:
-                    path.append(router_list[0])
-                    path.append(router_list[5])
-                    path.append(router_list[4])
-                    path.append(router_list[3])
-                    path.append(router_list[8])
+                    path.append(Router(router_list[0]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[8]))
 
         elif self.source=="3":
             if self.destination in row1:
-                path.append(router_list[1])
+                path.append(Router(router_list[1]))
                 if self.destination == "1":
-                    path.append(router_list[0])
+                    path.append(Router(router_list[0]))
             else:
-                path.append(router_list[1])
-                path.append(router_list[0])
+                path.append(Router(router_list[1]))
+                path.append(Router(router_list[0]))
                 if self.destination in row2:
-                    path.append(router_list[5])
+                    path.append(Router(router_list[5]))
                     if self.destination == "5":
-                        path.append(router_list[4])
+                        path.append(Router(router_list[4]))
                     elif self.destination == "4":
-                        path.append(router_list[4])
-                        path.append(router_list[3])
+                        path.append(Router(router_list[4]))
+                        path.append(Router(router_list[3]))
                 else:
-                    path.append(router_list[5])
-                    path.append(router_list[4])
-                    path.append(router_list[3])
-                    path.append(router_list[8])
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[8]))
                     if self.destination == "8":
-                        path.append(router_list[7])
+                        path.append(Router(router_list[7]))
                     elif self.destination == "7":
-                        path.append(router_list[7])
-                        path.append(router_list[6])
+                        path.append(Router(router_list[7]))
+                        path.append(Router(router_list[6]))
 
         elif self.source=="4":
             if self.destination in row2:
-                path.append(router_list[4])
+                path.append(Router(router_list[4]))
                 if self.destination=="6":
-                    path.append(router_list[5])
+                    path.append(Router(router_list[5]))
             elif self.destination in row1:
-                path.append(router_list[4])
-                path.append(router_list[5])
+                path.append(Router(router_list[4]))
+                path.append(Router(router_list[5]))
                 for i in range(0,int(self.destination)):
-                    path.append(router_list[i])
+                    path.append(Router(router_list[i]))
             elif self.destination in row3:
-                path.append(router_list[4])
-                path.append(router_list[5])
+                path.append(Router(router_list[4]))
+                path.append(Router(router_list[5]))
                 for i in range(6,int(self.destination)):
-                    path.append(router_list[i])
+                    path.append(Router(router_list[i]))
 
         elif self.source=="5":
             if self.destination in row2:
                 path.append(router_list[int(self.destination)-1])
             elif self.destination in row1:
                 if self.destination=="1":
-                    path.append(router_list[5])
-                    path.append(router_list[0])
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[0]))
                 elif self.destination=="2":
-                    path.append(router_list[5])
-                    path.append(router_list[0])
-                    path.append(router_list[1])
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[0]))
+                    path.append(Router(router_list[1]))
                 else:
-                    path.append(router_list[3])
-                    path.append(router_list[2])
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[2]))
             else:
                 if self.destination=="7":
-                    path.append(router_list[5])
-                    path.append(router_list[6])
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[6]))
                 elif self.destination=="8":
-                    path.append(router_list[5])
-                    path.append(router_list[6])
-                    path.append(router_list[7])
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[6]))
+                    path.append(Router(router_list[7]))
                 else:
-                    path.append(router_list[3])
-                    path.append(router_list[8])
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[8]))
 
         elif self.source=="6":
             if self.destination in row2:
-                path.append(router_list[4])
+                path.append(Router(router_list[4]))
                 if self.destination=="4":
-                    path.append(router_list[3])
+                    path.append(Router(router_list[3]))
             elif self.destination in row1:
-                path.append(router_list[4])
-                path.append(router_list[3])
+                path.append(Router(router_list[4]))
+                path.append(Router(router_list[3]))
                 for i in range(2,int(self.destination)-2,-1):
-                    path.append(router_list[i])
+                    path.append(Router(router_list[i]))
             elif self.destination in row3:
-                path.append(router_list[4])
-                path.append(router_list[3])
+                path.append(Router(router_list[4]))
+                path.append(Router(router_list[3]))
                 for i in range(8,int(self.destination)-2,-1):
-                    path.append(router_list[i])
+                    path.append(Router(router_list[i]))
 
         elif self.source=="7":
             if self.destination in row3:
-                path.append(router_list[7])
+                path.append(Router(router_list[7]))
                 if self.destination == "9":
-                    path.append(router_list[8])
+                    path.append(Router(router_list[8]))
             else:
-                path.append(router_list[7])
-                path.append(router_list[8])
+                path.append(Router(router_list[7]))
+                path.append(Router(router_list[8]))
                 if self.destination in row2:
-                    path.append(router_list[3])
+                    path.append(Router(router_list[3]))
                     if self.destination == "5":
-                        path.append(router_list[4])
+                        path.append(Router(router_list[4]))
                     elif self.destination == "6":
-                        path.append(router_list[4])
-                        path.append(router_list[5])
+                        path.append(Router(router_list[4]))
+                        path.append(Router(router_list[5]))
                 else:
-                    path.append(router_list[3])
-                    path.append(router_list[4])
-                    path.append(router_list[5])
-                    path.append(router_list[0])
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[0]))
                     if self.destination == "2":
-                        path.append(router_list[1])
+                        path.append(Router(router_list[1]))
                     elif self.destination == "3":
-                        path.append(router_list[1])
-                        path.append(router_list[2])
+                        path.append(Router(router_list[1]))
+                        path.append(Router(router_list[2]))
 
         elif self.source=="8":
             if self.destination in row3:
-                path.append(router_list[int(self.destination)-1])
+                path.append(Router(router_list[int(self.destination)-1]))
             elif self.destination in row2:
                 if self.destination == "4":
-                    path.append(router_list[8])
-                    path.append(router_list[3])
+                    path.append(Router(router_list[8]))
+                    path.append(Router(router_list[3]))
                 elif self.destination == "5":
-                    path.append(router_list[8])
-                    path.append(router_list[3])
-                    path.append(router_list[4])
+                    path.append(Router(router_list[8]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
                 else:
-                    path.append(router_list[6])
-                    path.append(router_list[5])
+                    path.append(Router(router_list[6]))
+                    path.append(Router(router_list[5]))
             else:
                 if self.destination == "1":
-                    path.append(router_list[8])
-                    path.append(router_list[3])
-                    path.append(router_list[4])
-                    path.append(router_list[5])
-                    path.append(router_list[0])
+                    path.append(Router(router_list[8]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[0]))
                 elif self.destination == "2":
-                    path.append(router_list[8])
-                    path.append(router_list[3])
-                    path.append(router_list[4])
-                    path.append(router_list[5])
-                    path.append(router_list[0])
-                    path.append(router_list[1])
+                    path.append(Router(router_list[8]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[0]))
+                    path.append(Router(router_list[1]))
                 else:
-                    path.append(router_list[6])
-                    path.append(router_list[5])
-                    path.append(router_list[4])
-                    path.append(router_list[3])
-                    path.append(router_list[2])
+                    path.append(Router(router_list[6]))
+                    path.append(Router(router_list[5]))
+                    path.append(Router(router_list[4]))
+                    path.append(Router(router_list[3]))
+                    path.append(Router(router_list[2]))
 
         elif self.source=="9":
             i=7
             j=0
             diff=abs(int(self.destination)-int(self.source))
             while (j<diff):
-                path.append(router_list[i])
+                path.append(Router(router_list[i]))
                 i-=1
                 j+=1
 
@@ -288,20 +283,7 @@ class Router:
 
     def __init__(self, name):
         self.name = name
-    # def add_source(self, source):
-    #     self.source = source
-    #     self.counter += 1
-    # def add_destination(self, destination):
-    #     self.destination = destination 
-    #     self.counter += 1
-    # def add_header(self):
-    #     self.counter += 1
-    # def add_flit(self):
-    #     self.counter += 1
-    # def add_tail(self):
-    #     self.counter = 0
-    def update(self,instruction, clock_cyle, statement, source, destination):
-        
+    def update(self,instruction, clock_cyle,partname, source, destination):
         self.current_element+=1
         type_of_element=""
         if(self.current_element==0):
@@ -310,9 +292,11 @@ class Router:
             type_of_element="SA"
         elif(self.current_element==2):
             type_of_element="Crossbar"
-        L = ["Clock cycle: ", str(clock_cyle) + " ", "Flit: ", str(statement) + " ", "Source: ", source.name + " ", "Destination: ", destination.name+" ","Present router: ",self.name+" ","Type: "+type_of_element,"\n"]
+        else:
+            type_of_element=str(self.current_element)
+        L = ["Clock cycle: ", str(clock_cyle) + " ", "Flit: ",partname+ " ", "Source: ", source.name + " ", "Destination: ", destination.name+" ","Present router: ",self.name+" ","Type: "+type_of_element," \n"]
         outfile.writelines(L)
-        print("Clock cycle:", clock_cyle, "Flit:", statement, "Source:", instruction.source, "Destination:", instruction.destination,"Present router: ",self.name+" ","Type: "+type_of_element)
+        print("Clock cycle:", clock_cyle, "Flit: ",  partname+" ", "Source:", instruction.source, "Destination:", instruction.destination,"Present router: ",self.name+" ","Type: "+type_of_element)
         return 
 
 
@@ -330,15 +314,15 @@ class NoC:
     all_instructions=[]
     clk1 = 50 #To find total number of clock cycles
 
-    r1 = Router("Router 1")
-    r2 = Router("Router 2")
-    r3 = Router("Router 3")
-    r4 = Router("Router 4")
-    r5 = Router("Router 5")
-    r6 = Router("Router 6")
-    r7 = Router("Router 7")
-    r8 = Router("Router 8")
-    r9 = Router("Router 9")
+    r1 = "Router 1"
+    r2 = "Router 2"
+    r3 = "Router 3"
+    r4 = "Router 4"
+    r5 = "Router 5"
+    r6 = "Router 6"
+    r7 = "Router 7"
+    r8 = "Router 8"
+    r9 = "Router 9"
     router_list = [r1,r2,r3,r4,r5,r6,r7,r8,r9]
 
     def add_instruction(self,instructions,routing):
@@ -432,26 +416,15 @@ class NoC:
             print("clock cycle = ", clock_cycle, len(queue))
             
             for instruction in queue:
+                # for i in queue:
+                #     for j in range(len(i.route)):
+                #         print(j,i.route[j].name,i.route[j].current_element)
+                #     print("")
                 queue_temp = queue.copy()
                 if len(instruction.route) > 1 :
-                    if instruction.head == True:                    
-                        if instruction.start_time == -1:
-                            instruction.start_time = clock_cycle
-                        instruction.route[0].update(instruction, clock_cycle, instruction.name, instruction.route[0], instruction.route[1])
-                        if instruction.route[0].current_element==2 :
-                            instruction.route.pop(0)
-                    elif instruction.body == True:                    
-                        if instruction.start_time == -1:
-                            instruction.start_time = clock_cycle
-                        instruction.route[0].update(instruction, clock_cycle, "", instruction.route[0], instruction.route[1])
-                        if instruction.route[0].current_element==2 :
-                            instruction.route.pop(0)
-                    elif instruction.tail == True:                    
-                        if instruction.start_time == -1:
-                            instruction.start_time = clock_cycle
-                        instruction.route[0].update(instruction, clock_cycle, "Tail", instruction.route[0], instruction.route[1])
-                        if instruction.route[0].current_element==2 :
-                            instruction.route.pop(0)
+                    instruction.route[0].update(instruction, clock_cycle,instruction.name, instruction.route[0], instruction.route[1])
+                    if instruction.route[0].current_element==2 :
+                        instruction.route.pop(0)
                     
 n = NoC()
 everything = n.play()
