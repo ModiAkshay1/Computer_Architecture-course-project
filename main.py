@@ -1,6 +1,5 @@
 from input import list_of_instructions
 from delay import delay_max
-# import matplotlib.pyplot as plt
 outfile = open('log.txt' , 'w')
 report_file = open('report.txt','w')
 delay_now =0
@@ -24,17 +23,16 @@ class Instruction:
     body1 = ""
 
     def __init__(self,x,routing,router_list):
-        # self.index=index  ,index
         self.clock_cycle = int(x[0])
         self.source = x[1]
         self.destination = x[2]
         # self.head = self.destination + self.source + "00"
         # self.data = instruction[3] + "01"
-        # self.tail = "00000000000000000000000000000010" #check krlena ek baar
+        # self.tail = "00000000000000000000000000000010" #find_instructions krlena ek baar
         self.make_path(routing,router_list)
         print(len(self.route))
 
-        self.data1 = x[3]  #To check if given flit is head,tail or body
+        self.data1 = x[3]  #To find_instructions if given flit is head,tail or body
         if (self.data1[-2:] == "01"):
             self.body1 = self.data1
             self.body = True
@@ -371,7 +369,7 @@ class NoC:
                 self.traffic9.sort(key = lambda x:x.clock_cycle)
             index+=1
 
-    def check(self, clock_cycle):
+    def find_instructions(self, clock_cycle):
         list = []
         if len(self.traffic1)>0 and int(self.traffic1[0].clock_cycle) == clock_cycle:
             list.append(self.traffic1[0])
@@ -402,21 +400,18 @@ class NoC:
             self.traffic9.pop(0)
         return list
     
-    def play(self):
-        #everything = []
-        #total_tic = int(input("Enter the total number of clock cycles: "))
-        total_tic = self.clk1
+    def stage(self):
+        clk_total = self.clk1
         queue = []
-        queue_temp = []
-        #routing = int(input("Enter 1 for XY routing and 2 for YX routing: "))
+        dup_queue = []
         routing = 1
         self.add_instruction(list_of_instructions, routing)
 
-        for clock_cycle in range(total_tic):
+        for clock_cycle in range(clk_total):
             global delay_now            
             delay_now += delay_max
-            queue = queue_temp.copy()
-            x = self.check(clock_cycle)
+            queue = dup_queue.copy()
+            x = self.find_instructions(clock_cycle)
             if len(x) > 0:
                 for i in x:
                     queue.append(i)
@@ -427,7 +422,7 @@ class NoC:
                 #     for j in range(len(i.route)):
                 #         print(j,i.route[j].name,i.route[j].current_element)
                 #     print("")
-                queue_temp = queue.copy()
+                dup_queue = queue.copy()
                 if len(instruction.route) > 1 :
                     if(instruction.start_time==-1):
                         instruction.start_time=delay_now
@@ -436,4 +431,4 @@ class NoC:
                         instruction.route.pop(0)
                     
 n = NoC()
-everything = n.play()
+everything = n.stage()
