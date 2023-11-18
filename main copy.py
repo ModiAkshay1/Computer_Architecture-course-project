@@ -17,7 +17,6 @@ class Instruction:
     source = ""
     destination = ""
     name=""
-    /home/akshay/Downloads/GroupNo09_ProjectNo01/Computer_Architecture-course-project-main/main copy.py
 
     head1 = ""
     data1=""
@@ -100,175 +99,259 @@ class Instruction:
 
         elif self.source=="2":
             if self.destination in col1:
+                links[0]+=1
                 path.append(Router(router_list[0]))
                 if (self.destination=="6"):
+                    links[7]+=1
                     path.append(Router(router_list[5]))
                 elif (self.destination=="7"):
+                    links[7]+=1
+                    links[6]+=1
                     path.append(Router(router_list[5]))
                     path.append(Router(router_list[6]))
             elif self.destination in col2:
                 if (self.destination=="5"):
+                    links[8]+=1
                     path.append(Router(router_list[4]))
                 elif (self.destination=="8"):
+                    links[8]+=1
+                    links[10]+=1
                     path.append(Router(router_list[4]))
                     path.append(Router(router_list[7]))
             elif self.destination in col3:
+                links[1]+=1
                 path.append(Router(router_list[2]))
                 if (self.destination=="4"):
+                    links[2]+=1
                     path.append(Router(router_list[3]))
                 elif (self.destination=="9"):
+                    links[2]+=1
+                    links[3]+=1
                     path.append(Router(router_list[3]))
                     path.append(Router(router_list[8]))
 
         elif self.source=="3":
             if self.destination in col1:
+                links[0]+=1
+                links[1]+=1
                 path.append(Router(router_list[1]))
                 path.append(Router(router_list[0]))
                 if (self.destination=="6"):
+                    links[7]+=1
                     path.append(Router(router_list[5]))
                 elif (self.destination=="7"):
+                    links[7]+=1
+                    links[6]+=1
                     path.append(Router(router_list[5]))
                     path.append(Router(router_list[6]))
             elif self.destination in col2:
+                links[1]+=1
                 path.append(Router(router_list[1]))
                 if (self.destination=="5"):
+                    links[8]+=1
                     path.append(Router(router_list[4]))
                 elif (self.destination=="8"):
+                    links[8]+=1
+                    links[10]+=1
                     path.append(Router(router_list[4]))
                     path.append(Router(router_list[7]))
             elif self.destination in col3:
                 if (self.destination=="4"):
+                    links[2]+=1
                     path.append(Router(router_list[3]))
                 elif (self.destination=="9"):
+                    links[2]+=1
+                    links[3]+=1
                     path.append(Router(router_list[3]))
                     path.append(Router(router_list[8]))
 
         elif self.source=="4":
             if self.destination in col1:
+                links[9]+=1
+                links[11]+=1
                 path.append(Router(router_list[4]))
                 path.append(Router(router_list[5]))
                 if (self.destination=="1"):
+                    links[7]+=1
                     path.append(Router(router_list[0]))
                 elif (self.destination=="7"):
+                    links[6]+=1
                     path.append(Router(router_list[6]))
             elif self.destination in col2:
+                links[9]+=1
                 path.append(Router(router_list[4]))
                 if (self.destination=="2"):
+                    links[8]+=1
                     path.append(Router(router_list[1]))
                 elif (self.destination=="8"):
+                    links[10]+=1
                     path.append(Router(router_list[7]))
             elif self.destination in col3:
                 if (self.destination=="3"):
+                    links[2]+=1
                     path.append(Router(router_list[2]))
                 elif (self.destination=="9"):
+                    links[3]+=1
                     path.append(Router(router_list[8]))
 
         elif self.source=="5":
             if self.destination in col1:
+                links[11]+=1
                 path.append(Router(router_list[5]))
                 if (self.destination=="1"):
+                    links[7]+=1
                     path.append(Router(router_list[0]))
                 elif (self.destination=="7"):
+                    links[6]+=1
                     path.append(Router(router_list[6]))
             elif self.destination in col2:
                 if (self.destination=="2"):
+                    links[8]+=1
                     path.append(Router(router_list[1]))
                 elif (self.destination=="8"):
+                    links[10]+=1
                     path.append(Router(router_list[7]))
             elif self.destination in col3:
+                links[9]+=1
                 path.append(Router(router_list[3]))
                 if (self.destination=="3"):
+                    links[2]+=1
                     path.append(Router(router_list[2]))
                 elif (self.destination=="9"):
+                    links[3]+=1
                     path.append(Router(router_list[8]))
 
         elif self.source=="6":
             if self.destination in col1:
                 if (self.destination=="1"):
+                    links[7]+=1
                     path.append(Router(router_list[0]))
                 elif (self.destination=="7"):
+                    links[6]+=1
                     path.append(Router(router_list[6]))
             elif self.destination in col2:
+                links[11]+=1
                 path.append(Router(router_list[4]))
                 if (self.destination=="2"):
+                    links[8]+=1
                     path.append(Router(router_list[1]))
                 elif (self.destination=="8"):
+                    links[10]+=1
                     path.append(Router(router_list[7]))
             elif self.destination in col3:
+                links[11]+=1
+                links[9]+=1
                 path.append(Router(router_list[4]))
                 path.append(Router(router_list[3]))
                 if (self.destination=="3"):
+                    links[2]+=1
                     path.append(Router(router_list[2]))
                 elif (self.destination=="9"):
+                    links[3]+=1
                     path.append(Router(router_list[8]))
 
         elif self.source=="7":
             if self.destination in col1:
                 if (self.destination=="1"):
+                    links[7]+=1
+                    links[6]+=1
                     path.append(Router(router_list[5]))
                     path.append(Router(router_list[0]))
                 elif (self.destination=="6"):
+                    links[6]+=1
                     path.append(Router(router_list[5]))
             elif self.destination in col2:
+                links[5]+=1
                 path.append(Router(router_list[7]))
                 if (self.destination=="2"):
+                    links[8]+=1
+                    links[10]+=1
                     path.append(Router(router_list[4]))
                     path.append(Router(router_list[1]))
                 elif (self.destination=="5"):
+                    links[10]+=1
                     path.append(Router(router_list[4]))
             elif self.destination in col3:
+                links[5]+=1
+                links[4]+=1
                 path.append(Router(router_list[7]))
                 path.append(Router(router_list[8]))
                 if (self.destination=="3"):
+                    links[3]+=1
+                    links[2]+=1
                     path.append(Router(router_list[3]))
                     path.append(Router(router_list[2]))
                 elif (self.destination=="4"):
+                    links[3]+=1
                     path.append(Router(router_list[3]))
 
         elif self.source=="8":
             if self.destination in col1:
+                links[5]+=1
                 path.append(Router(router_list[6]))
                 if (self.destination=="1"):
+                    links[7]+=1
+                    links[6]+=1
                     path.append(Router(router_list[5]))
                     path.append(Router(router_list[0]))
                 elif (self.destination=="6"):
+                    links[6]+=1
                     path.append(Router(router_list[5]))
             elif self.destination in col2:
                 if (self.destination=="2"):
+                    links[8]+=1
+                    links[10]+=1
                     path.append(Router(router_list[4]))
                     path.append(Router(router_list[1]))
                 elif (self.destination=="5"):
+                    links[10]+=1
                     path.append(Router(router_list[4]))
             elif self.destination in col3:
+                links[4]+=1
                 path.append(Router(router_list[8]))
                 if (self.destination=="3"):
+                    links[3]+=1
+                    links[2]+=1
                     path.append(Router(router_list[3]))
                     path.append(Router(router_list[2]))
                 elif (self.destination=="4"):
+                    links[3]+=1
                     path.append(Router(router_list[3]))
 
            
         elif self.source=="9":
             if self.destination in col1:
+                links[4]+=1
+                links[5]+=1
                 path.append(Router(router_list[7]))
                 path.append(Router(router_list[6]))
                 if (self.destination=="1"):
+                    links[7]+=1
+                    links[6]+=1
                     path.append(Router(router_list[5]))
                     path.append(Router(router_list[0]))
                 elif (self.destination=="6"):
+                    links[6]+=1
                     path.append(Router(router_list[5]))
             elif self.destination in col2:
+                links[4]+=1
                 path.append(Router(router_list[7]))
                 if (self.destination=="2"):
+                    links[8]+=1
+                    links[10]+=1
                     path.append(Router(router_list[4]))
                     path.append(Router(router_list[1]))
                 elif (self.destination=="5"):
+                    links[10]+=1
                     path.append(Router(router_list[4]))
             elif self.destination in col3:
                 if (self.destination=="3"):
+                    links[2]+=1
+                    links[3]+=1
                     path.append(Router(router_list[3]))
                     path.append(Router(router_list[2]))
                 elif (self.destination=="4"):
+                    links[3]+=1
                     path.append(Router(router_list[3]))
 
         return path
@@ -318,7 +401,7 @@ class Router:
 class NoC:
     traffic = [[] for i in range(9)]
     all_instructions=[]
-    clk1 = 50 #To find total number of clock cycles
+    clk1 = 50 #iniitiating with 50 total cycles and increase if an instruction comes with clock cycle>50
 
     router_list = ["Router 1","Router 2","Router 3","Router 4","Router 5","Router 6","Router 7","Router 8","Router 9"]
 
@@ -333,8 +416,9 @@ class NoC:
             # print(input.clock_cycle)
             self.all_instructions.append(input)
             if (input.clock_cycle >= self.clk1):
-                self.clk1 = input.clock_cycle
-
+                self.clk1 = input.clock_cycle+1
+            pelinks[int(input.source)-1]+=1
+            pelinks[int(input.destination)-1]+=1
             if(input.source=="1"):
                 self.traffic[0].append(input)
                 self.traffic[0].sort(key = lambda x:x.clock_cycle)
