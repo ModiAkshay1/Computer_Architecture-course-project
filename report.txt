@@ -1,3 +1,0 @@
-Clock cycle: 0 || Flit:  Head  || Source: 1 || Destination: 2 || Present router: Router 1 || Type: Input buffer || Delay: 3
-Clock cycle: 1 || Flit:  Head  || Source: 1 || Destination: 2 || Present router: Router 1 || Type: SA || Delay: 6
-Clock cycle: 2 || Flit:  Head  || Source: 1 || Destination: 2 || Present router: Router 1 || Type: Crossbar || Delay: 9
