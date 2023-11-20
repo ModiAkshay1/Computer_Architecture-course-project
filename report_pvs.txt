@@ -1,0 +1,36 @@
+delayed No  ||curr_delay: 9.5043 || Clock cycle: 0 || Flit:  Head  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: Input buffer || Delay: 30
+delayed No  ||curr_delay: 9.5043 || Clock cycle: 0 || Flit:  Body  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: Input buffer || Delay: 30
+delayed No  ||curr_delay: 9.5043 || Clock cycle: 0 || Flit:  Tail  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: Input buffer || Delay: 30
+delayed No  ||curr_delay: 8.9631 || Clock cycle: 0 || Flit:  Head  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: Input buffer || Delay: 30
+delayed No  ||curr_delay: 8.9631 || Clock cycle: 0 || Flit:  Body  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: Input buffer || Delay: 30
+delayed No  ||curr_delay: 8.9631 || Clock cycle: 0 || Flit:  Tail  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: Input buffer || Delay: 30
+delayed No  ||curr_delay: 14.7821 || Clock cycle: 1 || Flit:  Head  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: SA || Delay: 60
+delayed No  ||curr_delay: 19.3434 || Clock cycle: 1 || Flit:  Head  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: SA || Delay: 60
+delayed No  ||curr_delay: 14.7821 || Clock cycle: 2 || Flit:  Body  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: SA || Delay: 90
+delayed No  ||curr_delay: 19.3434 || Clock cycle: 2 || Flit:  Body  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: SA || Delay: 90
+delayed Yes ||curr_delay: 33.944 || Clock cycle: 3 || Flit:  Head  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: Crossbar || Delay: 120
+delayed No  ||curr_delay: 14.7821 || Clock cycle: 3 || Flit:  Tail  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: SA || Delay: 120
+delayed Yes ||curr_delay: 34.1831 || Clock cycle: 3 || Flit:  Head  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: Crossbar || Delay: 120
+delayed No  ||curr_delay: 19.3434 || Clock cycle: 3 || Flit:  Tail  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: SA || Delay: 120
+delayed No  ||curr_delay: 8.7486 || Clock cycle: 4 || Flit:  Head  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: Input buffer || Delay: 150
+delayed Yes ||curr_delay: 33.944 || Clock cycle: 4 || Flit:  Body  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: Crossbar || Delay: 150
+delayed No  ||curr_delay: 8.7486 || Clock cycle: 4 || Flit:  Head  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: Input buffer || Delay: 150
+delayed Yes ||curr_delay: 34.1831 || Clock cycle: 4 || Flit:  Body  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: Crossbar || Delay: 150
+delayed No  ||curr_delay: 23.0764 || Clock cycle: 5 || Flit:  Head  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: SA || Delay: 180
+delayed No  ||curr_delay: 8.7486 || Clock cycle: 5 || Flit:  Body  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: Input buffer || Delay: 180
+delayed Yes ||curr_delay: 33.944 || Clock cycle: 5 || Flit:  Tail  || Source: 1 || Destination: 3 || Present router: Router 1 || Type: Crossbar || Delay: 180
+delayed No  ||curr_delay: 8.7486 || Clock cycle: 5 || Flit:  Body  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: Input buffer || Delay: 180
+delayed Yes ||curr_delay: 34.1831 || Clock cycle: 5 || Flit:  Tail  || Source: 3 || Destination: 1 || Present router: Router 3 || Type: Crossbar || Delay: 180
+delayed No  ||curr_delay: 8.7486 || Clock cycle: 6 || Flit:  Tail  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: Input buffer || Delay: 210
+delayed No  ||curr_delay: 23.0764 || Clock cycle: 6 || Flit:  Head  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: SA || Delay: 210
+delayed No  ||curr_delay: 8.7486 || Clock cycle: 6 || Flit:  Tail  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: Input buffer || Delay: 210
+delayed Yes ||curr_delay: 31.0743 || Clock cycle: 7 || Flit:  Head  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: Crossbar || Delay: 240
+delayed No  ||curr_delay: 23.0764 || Clock cycle: 7 || Flit:  Body  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: SA || Delay: 240
+delayed Yes ||curr_delay: 31.0743 || Clock cycle: 8 || Flit:  Head  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: Crossbar || Delay: 270
+delayed No  ||curr_delay: 23.0764 || Clock cycle: 8 || Flit:  Body  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: SA || Delay: 270
+delayed Yes ||curr_delay: 31.0743 || Clock cycle: 9 || Flit:  Body  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: Crossbar || Delay: 300
+delayed No  ||curr_delay: 23.0764 || Clock cycle: 9 || Flit:  Tail  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: SA || Delay: 300
+delayed Yes ||curr_delay: 31.0743 || Clock cycle: 10 || Flit:  Body  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: Crossbar || Delay: 330
+delayed No  ||curr_delay: 23.0764 || Clock cycle: 10 || Flit:  Tail  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: SA || Delay: 330
+delayed Yes ||curr_delay: 31.0743 || Clock cycle: 11 || Flit:  Tail  || Source: 1 || Destination: 3 || Present router: Router 2 || Type: Crossbar || Delay: 360
+delayed Yes ||curr_delay: 31.0743 || Clock cycle: 12 || Flit:  Tail  || Source: 3 || Destination: 1 || Present router: Router 2 || Type: Crossbar || Delay: 390
