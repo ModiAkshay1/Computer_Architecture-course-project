@@ -1,3 +1,0 @@
-Clock cycle: 0 || Flit:  Head  || Source: 1 || Destination: 2 || Present Router: Router 1 || Next Router: Router 2 || Type: Input buffer 
-Clock cycle: 1 || Flit:  Head  || Source: 1 || Destination: 2 || Present Router: Router 1 || Next Router: Router 2 || Type: SA 
-Clock cycle: 2 || Flit:  Head  || Source: 1 || Destination: 2 || Present Router: Router 1 || Next Router: Router 2 || Type: Crossbar 
