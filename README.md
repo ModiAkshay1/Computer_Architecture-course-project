@@ -5,7 +5,6 @@ Akshay Modi | 2021166
 Shivanshu Aggarwal | 2021203
 Mohit | 2021167
 Viyaash | 2021216
-Ashhar | 2021137
 
     Structure of the Simulator
 
@@ -21,7 +20,7 @@ The mesh has 9 blocks, and connections like:
 We have provided 2 types of Routing Algorithms
 
 1. XY Routing prioritizes horizontal movement over vertical movement.
-2. YX Routing prioritizes horizontal movement over vertical movement.
+2. YX Routing prioritizes vertical movement over horizontal movement.
 
 Packet is the basic unit of transfer in NOC which is broken down into 3 parts:
 
